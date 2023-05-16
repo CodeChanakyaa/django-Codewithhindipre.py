@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <section class="pt-5">
+        <div class="row padd container-padd">
+            <div class="col-lg-12 col-md-8 mx-auto">
+                <h1 class="display-6 fw-bold">CodeWithNc</h1>
+                <p class="lead text-muted">Brows courses and find out the best course for you, CodeWithNc is my attempt to teach
+                    coding techniques to people in short time...</p>
+                <p class="d-grid gap-2 d-sm-flex">
+                    <a href="{% url 'goCourses' %}" class="btn btn-dark my-2">Watch all Courses</a>
+                    <a href="{% url 'goBlogs' %}" class="btn btn-primary my-2">All Blogs</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="my-3 w-100 padd container-padd">
+        <div class="row">
+
+            {% for course in courses %}
+            <div class="col-md-3 mb-4">
+                <a href="{% url 'goCourseModules' course.slug %}" class="text-decoration-none text-dark">
+                    <div class="card shadow-lg" style="border-radius: 24px 24px">
+                        <img src="/media/{{course.course_image}}" alt="" class="card-img-top"
+                            style="border-radius: 24px 24px 0px 0px;">
+                        <div class="card-body p-4">
+                            {% if course.is_premium %}
+                            <span class="badge bg-success">Premium</span>
+                            {% else %}
+                            <span class="badge bg-primary">Free</span>
+                            {% endif %}
+                            <h5 class="card-title mt-2">{{course.course_name|truncatewords:2}}</h5>
+                            <p class="card-text">{{course.course_desc|striptags|safe|truncatewords:11}}</p>
+                            <button class="btn btn-dark btn-sm">Start Watching</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+    <footer class="my-md-5 pt-md-0 container">
+        <div class="row padd container-padd">
+
+            <div class="col-8 col-md">
+                <a href="{% url 'goHome' %}" class="text-decoration-none">
+                    <h5 class="d-block mb-2 fw-bold lead text-dark">CodeWithNc</h5>
+                </a>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://www.youtube.com/@codewithnc">YouTube</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'goAbout' %}">About Page</a></li>
+                </ul>
+            </div>
+            <div class="col-4 col-md">
+                <h5 class="d-block mb-b fw-bold lead text-dark">Media</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="mailto:apps24adda@gmail.com">Sponsor</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'goContact' %}">Message</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+</div>
+
+{% endblock %}

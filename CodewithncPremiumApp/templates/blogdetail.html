@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .blog-image {
+        width: 80vw;
+        height: 72vh;
+    }
+
+    @media screen and (max-width: 720px) {
+        .blog-image {
+            width: 70vw;
+            height: 32vh;
+        }
+    }
+</style>
+
+<div class="container">
+    <section class="my-5">
+        <div class="row container-padd padd">
+            <div class="col-lg-12 col-md-8 mx-auto">
+                <h1 class="display-6 fw-bold">{{blog.blog_name}}</h1>
+                <p class="d-grid gap-2 d-sm-flex hide">
+                    <a href="{% url 'goBlogs' %}" class="hide btn btn-dark my-2">All Blogs</a>
+                    <a href="{% url 'goCourses' %}" class="hide btn btn-primary my-2">Courses</a>
+                </p>
+
+                <img class="blog-image rounded" src="/media/{{blog.blog_image}}" alt="blogimg">
+
+                <p class="lead text-muted">{{blog.blog_desc|striptags|safe}}</p>
+
+                <div class="product-device d-md-block text-muted mb-2">Author : {{blog.blog_author}}</div>
+                <div class="product-device product-device-2 d-md-block text-muted">Published on : {{blog.created_date}}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

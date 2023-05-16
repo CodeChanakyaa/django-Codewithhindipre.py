@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card-img-top {
+        width: 78vw;
+        height: 64vh;
+    }
+
+    /* .text {
+        padding-left: 88px;
+        padding-right: 88px;
+        text-align: justify;
+    } */
+
+    .text-container {
+        padding-left: 0px;
+        padding-right: 0px;
+        text-align: justify;
+    }
+
+    @media screen and (max-width: 720px) {
+        .card-img-top {
+            width: 62vw;
+            height: 28vh;
+        }
+
+        .course-img {
+            width: 82vw;
+            height: 28vh;
+        }
+
+        /* .text {
+            padding-left: 0px;
+            padding-right: 0px;
+            text-align: justify;
+        } */
+
+        .text-container {
+            padding-left: 0px;
+            padding-right: 0px;
+            text-align: justify;
+        }
+    }
+</style>
+
+<div class="container">
+
+    {% if course.is_premium %}
+        {% if user.profile.is_pro %}
+        <div class="padd container-padd">
+            <section class="pt-5">
+                <div class="row">
+                    <div class="col-lg-12 col-md-8 mx-auto">
+                        <h1 class="display-6 fw-bold">{{course.course_name}}</h1>
+                        <p class="lead text-muted">{{course.course_desc|striptags|safe}}</p>
+                        <p class="d-grid gap-2 d-sm-flex">
+                            <a href="{% url 'goCourses' %}" class="btn btn-dark my-2">Watch more courses</a>
+                            <a href="{% url 'goBlogs' %}" class="btn btn-primary my-2">Blogs</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+    
+            <div class="row mt-3 mb-5">
+                {% for m in modules %}
+                <div class="col-md-3">
+                    <a href="{% url 'goModule' m.course_module_slug %}" class="text-decoration-none text-dark">
+                        <div class="card border-muted mb-3" style="max-width: 22rem;">
+                            <div class="card-header">Course : {{course.course_name}}</div>
+                            <div class="card-body text-dark">
+                                <h5 class="card-title">{{m.course_module_name|truncatewords:2}}</h5>
+                                <p class="card-text">{{m.course_module_desc|striptags|safe|truncatewords:8}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+    
+                <p class="ms-1 text-muted my-3">Total number of modules till now : <b class="text-dark">{{modules|length}}</b></p>
+            </div>
+        </div>
+    
+        {% else %}
+        <div class="my-5 container container-padd padd">
+            <div class="col-xxl-10 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                  <div class="col-10 col-sm-8 col-lg-6 course-img">
+                    <img src="/media/{{course.course_image}}" width="700" height="500" class="d-block mx-lg-auto img-fluid rounded" alt="Bootstrap Themes" loading="lazy">
+                  </div>
+                  <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">{{course.course_name}}</h1>
+                    <p class="lead">{{course.course_desc|striptags|safe}}</p>
+                    <p class="d-grid gap-2 d-sm-flex">
+                        <a href="{% url 'goPremium' %}" class="btn btn-dark my-2">Subscribe premium</a>
+                        <a href="{% url 'goCourses' %}" class="btn btn-primary my-2">Continue with free</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+        </div>
+        {% endif %}
+
+    {% else %}
+    <div class="padd container-padd">
+        <section class="pt-5">
+            <div class="row">
+                <div class="col-lg-12 col-md-8 mx-auto">
+                    <h1 class="display-6 fw-bold">{{course.course_name}}</h1>
+                    <p class="lead text-muted">{{course.course_desc|striptags|safe}}</p>
+                    <p class="d-grid gap-2 d-sm-flex">
+                        <a href="{% url 'goPremium' %}" class="btn btn-dark my-2">Subscribe premium</a>
+                        <a href="{% url 'goCourses' %}" class="btn btn-primary my-2">Watch more courses</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="row mt-3 mb-5">
+            {% for m in modules %}
+            <div class="col-md-3">
+                <a href="{% url 'goModule' m.course_module_slug %}" class="text-decoration-none text-dark">
+                    <div class="card border-muted mb-3" style="max-width: 22rem;">
+                        <div class="card-header">Course : {{course.course_name}}</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{m.course_module_name|truncatewords:2}}</h5>
+                            <p class="card-text">{{m.course_module_desc|striptags|safe|truncatewords:8}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+            <p class="ms-1 text-muted my-3">Total number of modules till now : <b class="text-dark">{{modules|length}}</b></p>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

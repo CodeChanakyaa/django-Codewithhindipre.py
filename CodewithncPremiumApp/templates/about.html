@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .about-link-1 {
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+    }
+
+    .about-link-2 {
+        width: 78px;
+        height: 78px;
+        border-radius: 25px;
+    }
+
+    .about-link-3 {
+        width: 85px;
+        height: 78px;
+        border-radius: 25px;
+    }
+</style>
+
+<div class="container">
+    <section class="pt-5">
+        <div class="row padd container-padd">
+            <div class="col-lg-12 col-md-8 mx-auto mb-4">
+                <h1 class="display-6 fw-bold">CodeWithNc</h1>
+                <p class="lead text-muted">Browse courses and find out the best course for you. CodeWithNc is my attempt
+                    to teach coding techniques to people in short time, explore more about CodeWithNc through given
+                    links...</p>
+            </div>
+            <div class="row py-5 text-center mb-3">
+                <a href="https://github.com/CodeWithNc" class="col-md-3 text-dark mb-5"><ion-icon class="about-link-1"
+                        name="logo-github"></ion-icon></a>
+                <a href="https://www.paypal.com/paypalme/ShivamRathour301" class="col-md-3 text-dark mb-5"><ion-icon
+                        class="about-link-3" name="logo-paypal"></ion-icon></a>
+                <a href="https://www.instagram.com/codewithnc/" class="col-md-3 text-dark mb-5"><ion-icon
+                        class="about-link-2" name="logo-instagram"></ion-icon></a>
+                <a href="https://www.youtube.com/@codewithnc" class="col-md-3 text-dark"><ion-icon class="about-link-3"
+                        name="logo-youtube"></ion-icon></a>
+            </div>
+        </div>
+        <p class="d-grid gap-2 d-sm-flex container-padd padd">
+            <a href="{% url 'goCourses' %}" class="btn btn-dark my-1">Watch all Courses</a>
+            <a href="{% url 'goBlogs' %}" class="btn btn-primary my-1">All Blogs</a>
+        </p>
+    </section>
+
+    <footer class="mt-md-5 pt-md-5">
+        <div class="row container-padd padd">
+
+            <div class="col-8 col-md">
+                <a href="{% url 'goHome' %}" class="text-decoration-none">
+                    <h5 class="d-block mb-2 fw-bold lead text-dark">CodeWithNc</h5>
+                </a>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none"
+                            href="https://www.youtube.com/@codewithnc">YouTube</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'goAbout' %}">About
+                            Page</a></li>
+                </ul>
+            </div>
+            <div class="col-4 col-md">
+                <h5 class="d-block mb-b fw-bold lead text-dark">Media</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none"
+                            href="mailto:apps24adda@gmail.com">Sponsor</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none"
+                            href="{% url 'goContact' %}">Message</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+
+{% endblock %}

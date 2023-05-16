@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/stripe.css">
+
+<style>
+    .card-padd {
+        padding-left: 23%;
+        top: 50%;
+    }
+
+    @media screen and (max-width: 720px) {
+        .card-padd {
+            padding-left: 0%;
+            top: 0%;
+        }
+    }
+</style>
+
+{% if user.profile.is_pro %}
+<div class="container container-padd padd" style="padding-left: 22%; padding-top: 18%;">
+    <div class="card border-light mb-3" style="max-width: 44rem;">
+        <div class="card-header">Congratulations : {{user.first_name}} {{user.last_name}}</div>
+        <div class="card-body text-dark">
+            <h5 class="card-title mb-4">You have premium membership : <span class="text-muted">Watch all free & premium
+                    courses...</span></h5>
+            <a href="{% url 'goCourses' %}" class="btn btn-dark card-text">Watch Now</a>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="container my-4">
+    <header>
+        <div class="pricing-header py-4 pb-md-4 mx-auto text-center container-padd padd">
+            <h1 class="display-4 fw-bold">Subscribe Now</h1>
+            <p class="fs-5 text-muted my-4 hide lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi
+                modi
+                quos
+                officiis eveniet at iste vitae, in tempora reprehenderit repellat error natus ipsum, cupiditate omnis,
+                voluptatibus consequatur distinctio sapiente. Repudiandae facilis autem itaque qui dolor tempore tenetur
+                quisquam, eum maxime.</p>
+        </div>
+    </header>
+
+    <main class="card-padd">
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center container-padd padd">
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Free</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title"><span class="text-primary">₹0</span><small
+                                class="text-muted fw-light">/all</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li class="mb-2">All free courses</li>
+                            <li class="mb-2">Email support</li>
+                            <li class="mb-2">Help center access</li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-outline-dark">Already Accessed</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Premium</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title"><span class="text-success">₹559</span><small
+                                class="text-muted fw-light">/all</small>
+                        </h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li class="mb-2">All courses & projects</li>
+                            <li class="mb-2">Premium features</li>
+                            <li class="mb-2">Help center access</li>
+                        </ul>
+                        <!-- model button -->
+                        <button type="button" class="btn btn-lg w-100 btn-dark" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" data-bs-whatever="@mdo">Access Premium
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- model -->
+    <div class="modal fade padd" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Premium Membership Checkout Page</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form method="post" action="{% url 'checkout_session' %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-dark" value="Checkout">
+                    </form>
+
+                    <!-- <form method="post" action="{% url 'goPremium' %}">
+                        {% csrf_token %}
+                        <div class="row col-lg-12 gy-3 mb-4">
+                            <div class="col-md-5">
+                                <label for="name" class="form-label">Name on card</label>
+                                <input name="fullname" type="text" class="form-control" id="name" placeholder=""
+                                    required>
+                                <small class="text-muted">Full name</small>
+                                <div class="invalid-feedback">
+                                    Name on card is required
+                                </div>
+                            </div>
+
+                            <div class="col-md-7">
+                                <label for="cc-number" class="form-label">Credit card number</label>
+                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Credit card number is required
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="cc-expiration" class="form-label">Expiration</label>
+                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Expiration date required
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="cc-cvv" class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Security code required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-dark">Checkout</button>
+                        </div>
+                    </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endif %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/static/js/stripe.js"></script>
+{% endblock %}

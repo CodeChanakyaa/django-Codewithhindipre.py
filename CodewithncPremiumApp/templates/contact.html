@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container container-padd mt-4 padd">
+
+    <div class="ol-xl-12 col-xxl-10 px-2 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+            <div class="col-lg-6 text-lg-start">
+                <h1 class="display-4 fw-bold lh-1 mb-4">Send message using the form</h1>
+                <p class="col-lg-10 fs-4 hide">Below is an example form built entirely with Bootstrap’s form controls.
+                    Each required form group has a validation state that can be triggered by attempting to submit the
+                    form without completing it.</p>
+            </div>
+
+            <div class="col-md-12 mx-auto col-lg-5">
+                <form method="post" action="">
+                    {% csrf_token %}
+
+                    <div class="row gy-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input name="name" type="text" class="form-control" id="name" placeholder="" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input name="email" type="text" class="form-control" id="email" placeholder="" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input name="subject" type="text" class="form-control" id="subject" placeholder="" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea name="message" type="text" class="form-control" id="message" placeholder="" required></textarea>
+                        </div>
+                    </div>
+
+                    {% if error %}
+                    <div class="mb-3 ps-1" role="alert">
+                        All fields are mandatory in form !
+                    </div>
+                    {% endif %}
+
+                    {% if message %}
+                    <div class="mb-3 ps-1" role="alert">
+                        {{message}}
+                    </div>
+                    {% endif %}
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-dark w-100 mb-1">Submit Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

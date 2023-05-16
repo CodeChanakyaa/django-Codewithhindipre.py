@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container container-padd padd">
+
+    <div class="ol-xl-12 col-xxl-10 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+            <div class="col-lg-7 text-lg-start">
+                <h1 class="display-4 fw-bold lh-1 mb-4">Vertically centered hero sign-up form</h1>
+                <p class="col-lg-10 fs-4 text-muted hide">Lorem ipsum form controls. Each
+                    is an example form built entirely with example form built with example form built entirely with Bootstrap’s form controls. Each Bootstrap’s form controls. Each required form group has a
+                    validation state that can be triggered by attempting to submit the form without completing it.</p>
+            </div>
+
+            <div class="col-md-12 mx-auto col-lg-5">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleInputName1" class="form-label">First Name</label>
+                        <input name="userfirstname" type="text" class="form-control" id="exampleInputName1"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputName2" class="form-label">Last Name</label>
+                        <input name="userlastname" type="text" class="form-control" id="exampleInputName2"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input name="useremail" type="email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input name="userpassword" type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    {% if error %}
+                    <div class="mb-3 ps-1" role="alert">
+                        All fields are mandatory in form !
+                    </div>
+                    {% endif %}
+
+                    {% if message %}
+                    <div class="mb-3 ps-1" role="alert">
+                        {{message}}
+                    </div>
+                    {% endif %}
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-dark w-100 mb-1">Sign Up</button>
+                        <span class="text-muted">or</span>
+                        <a type="button" class="btn btn-outline-secondary w-100 mt-1"
+                            href="{% url 'goUser' %}">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
