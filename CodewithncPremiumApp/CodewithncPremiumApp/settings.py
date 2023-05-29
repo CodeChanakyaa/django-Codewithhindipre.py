@@ -27,7 +27,7 @@ SECRET_KEY = '456789jhgfdc@%$rfghjk77654fv$9qv-s*e=z@%7ss7'
 DEBUG = config('DEBUG')
 
 if DEBUG is False:
-    ALLOWED_HOSTS = ['localhost']
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -147,7 +147,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True #False at the time of deployment
 
 # stripe
 if DEBUG:
